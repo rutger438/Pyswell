@@ -1,10 +1,3 @@
-"""
-Auther: Rutger van Teutem
-Version: 0.2
-Release date: May 17th 2016
-Python version: 2.7
-Requires: pygame
-"""
 import pygame, random
 from pygame.locals import *
 screen = pygame.display.set_mode((640, 480),HWSURFACE|DOUBLEBUF|RESIZABLE)
@@ -15,8 +8,6 @@ functions for drawing presets like images."""
 class ScreenManager():
     def __init__(self):
         self.surf = pygame.Surface((640, 480), pygame.SRCALPHA, 32)
-        self.width = 800
-        self.height = 600
         self.imgcache = {}
 
     def get_surf(self):
@@ -51,20 +42,8 @@ class ScreenManager():
     def clear(self): #Clears the screen by filling it with black
         self.surf = pygame.Surface((640, 480), pygame.SRCALPHA, 32)
         screen.fill((0,0,0))
-
-    def set_size(self, (width, height)):
-        self.width = width
-        self.height = height
-
-    def is_large(self):
-        if self.width>(640*2) and self.height>(480*2):
-            return True
-        else:
-            return False
     
     def update(self): #Updates the screen every tick
-        if self.width>(640*2) and self.height>(480*2):
-            self.surf = pygame.transform.scale2x(self.surf)
         screen.blit(self.surf, (0, 0))
         pygame.display.update()
 
@@ -101,7 +80,7 @@ class WorldManager():
         return self.max_score
 
     def loadFinish(self):
-        with open ("./levels2/"+self.level+"f.txt", "r") as myfile:
+        with open ("./levels/"+self.level+"f.txt", "r") as myfile:
             file_array=[[digit for digit in line.strip()] for line in myfile]
         i=0
         j=0
